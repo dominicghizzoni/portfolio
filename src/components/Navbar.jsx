@@ -3,22 +3,45 @@ import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <header className="header">
-        <NavLink to='/' className='w-10 h-10 rounded-lg bg-white items-center justify-center flex font-bold
-        shadow-md'>
-            <p className="blue-gradient-text">Home</p>
+    <header className="fixed top-0 left-0 w-full z-[100] px-8 py-5 flex justify-between items-center bg-black/30 backdrop-blur-md">
+
+      {/* Logo */}
+      <NavLink
+        to="/"
+        className="px-4 py-2 rounded-xl bg-white text-black font-bold shadow-lg"
+      >
+        Home
+      </NavLink>
+
+      {/* Navigation */}
+      <nav className="flex gap-8 text-lg font-medium text-white">
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? 'text-blue-400' : 'text-white'
+          }
+        >
+          About
         </NavLink>
-        <nav className='flex text-lg gap-7 font-medium'>
-            <NavLink to='/about' className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>
-                About
-            </NavLink>
-            <NavLink to='/projects' className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>
-                Projects
-            </NavLink>
-            <NavLink to='/contact' className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>
-                Contact
-            </NavLink>
-        </nav>
+
+        <NavLink
+          to="/projects"
+          className={({ isActive }) =>
+            isActive ? 'text-blue-400' : 'text-white'
+          }
+        >
+          Projects
+        </NavLink>
+
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? 'text-blue-400' : 'text-white'
+          }
+        >
+          Contact
+        </NavLink>
+      </nav>
     </header>
   )
 }
