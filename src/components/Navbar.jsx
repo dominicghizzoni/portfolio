@@ -3,12 +3,15 @@ import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] px-8 py-5 flex justify-between items-center bg-black/30 backdrop-blur-md">
-
+   <header className="sticky top-0 left-0 w-full z-[100] px-8 py-5 flex justify-between items-center bg-black/30 backdrop-blur-md">
       {/* Logo */}
       <NavLink
         to="/"
-        className="px-4 py-2 rounded-xl bg-white text-black font-bold shadow-lg"
+        className={({ isActive }) =>
+          `text-lg font-medium ${
+            isActive ? 'text-blue-400' : 'text-white'
+          }`
+        }
       >
         Home
       </NavLink>

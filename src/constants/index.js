@@ -295,9 +295,6 @@ export const projects = [
     features:
       'OAuth authentication, playlist generation, animated UI with Framer Motion.',
 
-    tradeoffs:
-      'Relied on external APIs to prioritize frontend experience over backend storage.',
-
     outcome:
       'Delivered real-time personalized music recommendation platform.',
 
@@ -322,9 +319,6 @@ export const projects = [
     features:
       'Natural language input parsing, token-based prompting, dynamic team generation.',
 
-    tradeoffs:
-      'Balanced prompt complexity with API latency constraints.',
-
     outcome:
       'Generated AI-driven personalized Pokémon teams from user descriptions.',
 
@@ -345,9 +339,6 @@ export const projects = [
 
     features:
       'Grid system, mine generation, recursive reveal, win/loss detection.',
-
-    tradeoffs:
-      'Focused on logic correctness over graphical enhancements.',
 
     outcome:
       'Fully functional Minesweeper clone demonstrating strong C++ fundamentals.',

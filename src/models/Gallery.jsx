@@ -175,15 +175,22 @@ export function Gallery({
     // ACTIVE PROJECT
     // -----------------------------------------
 
-    const activeProject = findClosestProject(
-      currentRotation.current
+    const rotationDifference = Math.abs(
+      targetRotation - currentRotation.current
     );
 
-    setCurrentStage((prev) =>
-      prev !== activeProject.id
-        ? activeProject.id
-        : prev
-    );
+    // only update once rotation is nearly settled
+    if (rotationDifference < 0.08) {
+      const activeProject = findClosestProject(
+        currentRotation.current
+      );
+
+      setCurrentStage((prev) =>
+        prev !== activeProject.id
+          ? activeProject.id
+          : prev
+      );
+    }
   });
 
   // ---------------------------------------------------
@@ -217,11 +224,12 @@ export function Gallery({
 
     e.target.releasePointerCapture(e.pointerId);
 
-    const closestProject = findClosestProject(
-      currentRotation.current
-    );
+    // find nearest step based on CURRENT rotation cycle
+    const snappedRotation =
+      Math.round(currentRotation.current / STEP) *
+      STEP;
 
-    setTargetRotation(closestProject.angle);
+    setTargetRotation(snappedRotation);
   };
 
   // ---------------------------------------------------
