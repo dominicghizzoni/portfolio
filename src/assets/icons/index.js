@@ -26,8 +26,17 @@ import arrow from './arrow.svg'
 import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
+import cpp from './CPP.png'
+import java from './java.png'
+import Python from './Python.png'
+import SQL from './sql.svg'
+import r from './r.png'
+import assembly from './assembly.svg'
+import aws from './aws.png'
+import jira from './jira.png'
 
 export {
+    cpp,
     css,
     express,
     git,
@@ -55,5 +64,12 @@ export {
     arrow,
     contact,
     soundon,
-    soundoff
+    soundoff,
+    java,
+    Python,
+    SQL,
+    r,
+    assembly,
+    aws,
+    jira,
 }

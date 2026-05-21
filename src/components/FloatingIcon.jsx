@@ -3,20 +3,32 @@ import { Billboard, Text } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 
-import icon from '../assets/images/sidelineicon.png'
+const FloatingIcon = ({
+  position = [0, 2, 0],
+  label = 'My App',
+  image
+}) => {
 
-const FloatingIcon = ({ position = [0, 2, 0], label = 'My App' }) => {
-  const texture = useLoader(THREE.TextureLoader, icon)
+  const texture = useLoader(
+    THREE.TextureLoader,
+    image
+  )
 
   return (
     <Billboard position={position}>
+
+      {/* ICON */}
+
       <mesh>
         <planeGeometry args={[1.5, 1.5]} />
+
         <meshBasicMaterial
           map={texture}
           transparent
         />
       </mesh>
+
+      {/* LABEL */}
 
       <Text
         position={[0, -1.2, 0]}
@@ -27,6 +39,7 @@ const FloatingIcon = ({ position = [0, 2, 0], label = 'My App' }) => {
       >
         {label}
       </Text>
+
     </Billboard>
   )
 }
