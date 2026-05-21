@@ -5,7 +5,6 @@ import * as THREE from 'three'
 
 const FloatingIcon = ({
   position = [0, 2, 0],
-  label = 'My App',
   image
 }) => {
 
@@ -28,17 +27,7 @@ const FloatingIcon = ({
         />
       </mesh>
 
-      {/* LABEL */}
 
-      <Text
-        position={[0, -1.2, 0]}
-        fontSize={0.25}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {label}
-      </Text>
 
     </Billboard>
   )

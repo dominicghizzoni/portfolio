@@ -8,10 +8,10 @@ import Sky from "../models/Sky";
 import me from "../assets/images/pfp.JPG";
 
 const Home = () => {
-  const [currentProject, setCurrentProject] = useState(1);
-  const [targetRotation, setTargetRotation] = useState(0);
-
   const STEP = (2 * Math.PI) / 7;
+  const [currentProject, setCurrentProject] = useState(1);
+  const [targetRotation, setTargetRotation] = useState(STEP * 1);
+
 
   // ---------------------------------------------------
   // PROJECT DATA
@@ -285,7 +285,7 @@ const Home = () => {
             near: 0.1,
             far: 1000,
             position: [0, 1.6, 0],
-            fov: 50,
+            fov: 75,
           }}
         >
           <Suspense fallback={<Loader />}>

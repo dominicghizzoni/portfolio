@@ -205,7 +205,7 @@ export function Gallery({
 
     const delta = e.clientX - previousX.current;
 
-    currentRotation.current -= delta * 0.005;
+    currentRotation.current -= delta * 0.002;
 
     setTargetRotation(currentRotation.current);
 
