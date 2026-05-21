@@ -37,76 +37,85 @@ export function Gallery({
   // PROJECT CONFIG
   // ---------------------------------------------------
 
+  const radius = 5;
+
   const PROJECTS = [
     {
       id: 1,
       name: "P2P File Sharing",
       angle: STEP * 1,
-      position: [0, 0.5, -3],
       image: p2pIcon,
     },
     {
       id: 2,
       name: "Vertex Cover (NP-Complete)",
       angle: STEP * 2,
-      position: [-3, 0.5, -1],
       image: vcIcon,
     },
     {
       id: 3,
       name: "Sideline",
       angle: STEP * 3,
-      position: [-3, 0.5, 2],
       image: sidelineIcon,
     },
     {
       id: 4,
       name: "VocalSphere",
       angle: STEP * 4,
-      position: [0, 0.5, 3],
       image: vocalsphereIcon,
     },
     {
       id: 5,
       name: "DayBeats",
       angle: STEP * 5,
-      position: [3, 0.5, 2],
       image: daybeatsIcon,
     },
     {
       id: 6,
       name: "PokeTeamer (AI)",
       angle: STEP * 6,
-      position: [3, 0.5, -1],
       image: pokeIcon,
     },
     {
       id: 7,
       name: "Minesweeper (C++)",
       angle: STEP * 7,
-      position: [0, 0.5, -3],
       image: minesweeperIcon,
     },
-  ];
+  ].map((project) => ({
+    ...project,
+
+    position: [
+      Math.cos(project.angle) * radius,
+      1.5,
+      Math.sin(project.angle) * radius,
+    ],
+  }));
 
   // ---------------------------------------------------
   // FIND CLOSEST PROJECT
   // ---------------------------------------------------
 
   const findClosestProject = (rotation) => {
-    const normalized =
-      ((rotation % (Math.PI * 2)) + Math.PI * 2) %
-      (Math.PI * 2);
+    const TWO_PI = Math.PI * 2;
+
+    const normalizedRotation =
+      ((rotation % TWO_PI) + TWO_PI) % TWO_PI;
 
     let closest = PROJECTS[0];
     let smallestDistance = Infinity;
 
     PROJECTS.forEach((project) => {
-      let distance = Math.abs(normalized - project.angle);
+      const normalizedAngle =
+        ((project.angle % TWO_PI) + TWO_PI) % TWO_PI;
+
+      let distance = Math.abs(
+        normalizedRotation - normalizedAngle
+      );
 
       distance = Math.min(
         distance,
-        Math.PI * 2 - distance
+        TWO_PI - distance
       );
 
       if (distance < smallestDistance) {
@@ -133,7 +142,9 @@ export function Gallery({
       targetRotation - currentRotation.current;
 
     difference =
-      ((difference + Math.PI) % TWO_PI) - Math.PI;
+      difference =
+        ((difference + Math.PI + TWO_PI) % TWO_PI) -
+        Math.PI;
 
     if (!dragging.current) {
       currentRotation.current += difference * 0.08;
@@ -143,17 +154,22 @@ export function Gallery({
     // CAMERA ORBIT
     // -----------------------------------------
 
-    const radius = 2;
 
-    camera.position.x =
-      Math.sin(currentRotation.current) * radius;
+  camera.position.x =
+    Math.cos(currentRotation.current) * 2;
 
-    camera.position.z =
-      Math.cos(currentRotation.current) * radius;
+  camera.position.z =
+    Math.sin(currentRotation.current) * 2;
 
     camera.position.y = 1.8;
 
-    camera.lookAt(0, 1.5, 0);
+  const lookDistance = 4;
+
+  camera.lookAt(
+    Math.cos(currentRotation.current) * lookDistance,
+    1.5,
+    Math.sin(currentRotation.current) * lookDistance
+  );
 
     // -----------------------------------------
     // ACTIVE PROJECT
@@ -175,8 +191,13 @@ export function Gallery({
   // ---------------------------------------------------
 
   const handlePointerDown = (e) => {
+    e.stopPropagation();
+
     dragging.current = true;
+
     previousX.current = e.clientX;
+
+    e.target.setPointerCapture(e.pointerId);
   };
 
   const handlePointerMove = (e) => {
@@ -184,15 +205,17 @@ export function Gallery({
 
     const delta = e.clientX - previousX.current;
 
-    currentRotation.current += delta * 0.005;
+    currentRotation.current -= delta * 0.005;
 
     setTargetRotation(currentRotation.current);
 
     previousX.current = e.clientX;
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e) => {
     dragging.current = false;
+
+    e.target.releasePointerCapture(e.pointerId);
 
     const closestProject = findClosestProject(
       currentRotation.current

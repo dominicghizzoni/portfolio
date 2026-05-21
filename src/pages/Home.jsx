@@ -201,7 +201,7 @@ const Home = () => {
         {/* LEFT PANEL */}
 
         <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
-          <div className="w-80 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 text-white shadow-2xl">
+          <div className="w-80 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 text-white shadow-2xl">
             <p className="text-sm uppercase tracking-widest text-gray-400 mb-2">
               Selected Project
             </p>
@@ -284,7 +284,7 @@ const Home = () => {
           camera={{
             near: 0.1,
             far: 1000,
-            position: [0, 1.6, 7],
+            position: [0, 1.6, 0],
             fov: 50,
           }}
         >
