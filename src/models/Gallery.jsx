@@ -9,7 +9,7 @@ import scene from "../assets/3d/gallery.glb";
 import sidelineIcon from "../assets/images/sidelineicon.png";
 import daybeatsIcon from "../assets/images/DayBeatsLogo.png";
 import vocalsphereIcon from "../assets/images/VocalSphereLogo.png";
-import p2pIcon from "../assets/images/p2pIcon.png";
+import p2pIcon from "../assets/images/p2picon.png";
 import vcIcon from "../assets/images/vcIcon.png";
 import pokeIcon from "../assets/images/pokeIcon.png";
 import minesweeperIcon from "../assets/images/minesweeperIcon.png";
