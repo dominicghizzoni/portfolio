@@ -1,36 +1,35 @@
-import { shopify, starbucks, sideline, UF, vocalsphere, daybeats, minesweeper, vc, poke, p2p } from "../assets/images";
+import {     
+  daybeats,
+  minesweeper,
+  p2p,
+  poke,
+  sideline,
+  UF,
+  vc,
+  vocalsphere 
+} from "../assets/images";
+
 import {
-    car,
-    contact,
-    css,
-    estate,
-    express,
-    git,
-    github,
-    html,
-    javascript,
-    linkedin,
-    mongodb,
-    motion,
-    mui,
-    nextjs,
-    nodejs,
-    pricewise,
-    react,
-    redux,
-    sass,
-    snapgram,
-    summiz,
-    tailwindcss,
-    threads,
-    typescript,
-    cpp,
-    java,
-    Python,
-    SQL,
-    r,
-    aws,
-    jira,
+  arrow,
+  aws,
+  css,
+  cpp,
+  express,
+  git,
+  github,
+  html,
+  java,
+  javascript,
+  jira,
+  mongodb,
+  nextjs,
+  nodejs,
+  Python,
+  r,
+  SQL,
+  react,
+  tailwindcss,
+  typescript
 } from "../assets/icons";
 
 export const skills = [
@@ -157,35 +156,19 @@ export const experiences = [
     },
 ];
 
-export const socialLinks = [
-    {
-        name: 'Contact',
-        iconUrl: contact,
-        link: '/contact',
-    },
-    {
-        name: 'GitHub',
-        iconUrl: github,
-        link: 'https://github.com/dominicghizzoni',
-    },
-    {
-        name: 'LinkedIn',
-        iconUrl: linkedin,
-        link: 'https://www.linkedin.com/in/dominicghizzoni/',
-    }
-];
+
 
 export const projects = [
 
-  // 🥇 TIER 1 — ELITE CS SIGNAL
   {
     iconUrl: p2p,
+    id: "p2p",
     theme: 'btn-back-blue',
     name: 'P2P File Sharing System',
     role: 'Systems Developer',
 
     problem:
-      'Centralized file sharing systems create bottlenecks and single points of failure.',
+      'Centralized file sharing creates bottlenecks, single points of failure, and bandwidth waste.',
 
     system:
       'Designed a peer-to-peer architecture using Python TCP sockets for direct device-to-device file transfer.',
@@ -199,11 +182,14 @@ export const projects = [
     outcome:
       'Implemented a distributed file-sharing system demonstrating core networking concepts.',
 
-    tech: 'Python • TCP Sockets • Networking'
+    tech: 'Python • TCP Sockets • Networking',
+
+    link: 'https://github.com/JettNguyen/networks-project'
   },
 
   {
     iconUrl: vc,
+    id: "vc",
     theme: 'btn-back-orange',
     name: 'Vertex Cover (NP-Complete Solver)',
     role: 'Algorithm Engineer',
@@ -228,6 +214,7 @@ export const projects = [
 
   {
     iconUrl: sideline,
+    id: "sideline",
     theme: 'btn-back-green',
     name: 'Sideline',
     role: 'Scrum Master • Full-Stack Engineer',
@@ -253,15 +240,15 @@ export const projects = [
     deploy: 'https://jettnguyen.github.io/Sideline/'
   },
 
-  // 🥈 TIER 2 — APPLICATION SYSTEMS
   {
     iconUrl: vocalsphere,
+    id: "vocalsphere",
     theme: 'btn-back-purple',
     name: 'VocalSphere',
     role: 'Full-Stack Engineer',
 
     problem:
-      'No lightweight platform for sharing and discovering social audio content.',
+      'Existing social platforms lack a lightweight, audio-first sharing experience.',
 
     system:
       'Designed React + Node.js + MongoDB architecture with structured media and user schemas.',
@@ -277,11 +264,11 @@ export const projects = [
 
     tech: 'React • Node.js • MongoDB • Python • Express',
 
-    link: null
   },
 
   {
     iconUrl: daybeats,
+    id: "daybeats",
     theme: 'btn-back-black',
     name: 'DayBeats',
     role: 'Full-Stack Engineer',
@@ -303,9 +290,9 @@ export const projects = [
     link: 'https://github.com/dominicghizzoni/DayBeats',
   },
 
-  // 🥉 TIER 3 — SUPPORTING PROJECTS
   {
     iconUrl: poke,
+    id: "poke",
     theme: 'btn-back-yellow',
     name: 'PokeTeamer',
     role: 'Full-Stack Engineer',
@@ -327,6 +314,7 @@ export const projects = [
 
   {
     iconUrl: minesweeper,
+    id: "minesweeper",
     theme: 'btn-back-purple',
     name: 'Minesweeper Clone',
     role: 'C++ Developer',

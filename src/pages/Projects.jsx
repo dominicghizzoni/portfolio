@@ -2,8 +2,30 @@ import React from 'react'
 import { projects } from '../constants'
 import { arrow } from '../assets/icons'
 import CTA from '../components/CTA'
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Projects = () => {
+const location = useLocation();
+
+useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.replace("#", "");
+    
+    // Wait for next frame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      const element = document.getElementById(id);
+      
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  }, [location]);
+
   return (
     <section className='max-container'>
       <h1 className='head-text pt-10'>
@@ -13,12 +35,17 @@ const Projects = () => {
       <p className='mt-5 text-slate-500 max-w-3xl'>
         Selected projects showcasing full-stack development, system design,
         and data-driven applications. Each project highlights my role,
-        technical decisions, and engineering contributions.
+        technical decisions, and engineering contributions. Some projects may not have a 
+        public repository due to proprietary or sensitive content, but I am happy to discuss them in detail upon request.
       </p>
 
       <div className='flex flex-wrap my-20 gap-16'>
         {projects.map((project) => (
-          <div className='lg:w-[420px] w-full' key={project.name}>
+          <div
+            id={project.id}
+            className='lg:w-[420px] w-full scroll-mt-24'
+            key={project.id}
+          >
 
             {/* ICON */}
             <div className='block-container w-12 h-12'>

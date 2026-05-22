@@ -1,6 +1,7 @@
 import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getProjectColor } from "../utils/projectTheme";
 
 import Loader from "../components/Loader";
 import Gallery from "../models/Gallery";
@@ -22,6 +23,7 @@ const Home = () => {
   const projectData = {
     1: {
       title: "P2P File Sharing System",
+      id: "p2p",
       category: "Systems",
       description:
         "Distributed peer-to-peer file sharing system using TCP sockets and chunk-based transfer.",
@@ -32,6 +34,7 @@ const Home = () => {
 
     2: {
       title: "Vertex Cover (NP-Complete)",
+      id: "vc",
       category: "Algorithms",
       description:
         "Brute-force solver and polynomial-time certifier for NP-complete Vertex Cover problem.",
@@ -43,6 +46,7 @@ const Home = () => {
 
     3: {
       title: "Sideline",
+      id: "sideline",
       category: "Full-Stack Systems",
       description:
         "Agile-built sports management platform with authentication, AWS S3 media storage, and role-based access control.",
@@ -55,6 +59,7 @@ const Home = () => {
 
     4: {
       title: "VocalSphere",
+      id: "vocalsphere",
       category: "Full-Stack",
       description:
         "Social audio platform with structured backend, media uploads, and feed system architecture.",
@@ -65,6 +70,7 @@ const Home = () => {
 
     5: {
       title: "DayBeats",
+      id: "daybeats",
       category: "API / Frontend Systems",
       description:
         "Spotify-integrated music personalization platform using OAuth and real-time recommendation flow.",
@@ -77,6 +83,7 @@ const Home = () => {
 
     6: {
       title: "PokeTeamer",
+      id: "poke",
       category: "AI Systems",
       description:
         "LLM-powered system mapping personality inputs into structured Pokémon team generation.",
@@ -88,6 +95,7 @@ const Home = () => {
 
     7: {
       title: "Minesweeper (C++)",
+      id: "minesweeper",
       category: "CS Fundamentals",
       description:
         "Grid-based Minesweeper clone implementing recursive flood-fill and game state logic.",
@@ -95,6 +103,20 @@ const Home = () => {
       github: "",
       angle: STEP * 7,
     },
+  };
+
+  const getProjectId = (title) => {
+    const map = {
+      "Sideline": "sideline",
+      "VocalSphere": "vocalsphere",
+      "DayBeats": "daybeats",
+      "P2P File Sharing System": "p2p",
+      "Vertex Cover (NP-Complete)": "vc",
+      "PokeTeamer": "poke",
+      "Minesweeper (C++)": "minesweeper",
+    };
+
+    return map[title];
   };
 
   const projectIds = [1, 2, 3, 4, 5, 6, 7];
@@ -199,11 +221,12 @@ const Home = () => {
               Selected Project
             </p>
 
-            <p className="text-xs uppercase tracking-widest text-blue-400 mb-2">
-              {
-                projectData[currentProject]
-                  ?.category
-              }
+            <p
+              className={`text-xs uppercase tracking-widest mb-2 ${getProjectColor(
+                projectData[currentProject]?.title
+              )}`}
+            >
+              {projectData[currentProject]?.category}
             </p>
 
             <h2 className="text-3xl font-bold mb-4">
@@ -234,12 +257,7 @@ const Home = () => {
             </div>
 
             <a
-              href={
-                projectData[currentProject]
-                  ?.github
-              }
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/projects#${getProjectId(projectData[currentProject]?.title)}`}
               className="inline-flex px-5 py-2 border border-white rounded-xl hover:bg-white hover:text-black transition"
             >
               View Project
