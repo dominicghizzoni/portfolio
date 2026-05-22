@@ -181,9 +181,9 @@ const Home = () => {
           </div>
 
           <p className="text-xl text-gray-300 mt-20">
-            Below is a 3D gallery showcasing some
-            of my projects. Drag to look around
-            the gallery or use the arrows.
+            Below is a 3D gallery showcasing some of my projects. 
+            Drag icons left and right or use the arrows to explore. 
+            For a simplified view, navigate to the projects tab at the top.
           </p>
         </div>
       </section>
@@ -193,8 +193,8 @@ const Home = () => {
       <section className="w-full h-screen relative bg-black overflow-hidden">
         {/* LEFT PANEL */}
 
-        <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
-          <div className="w-80 h-100 bg-black/55 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-white shadow-2xl flex flex-col">
+        <div className="absolute left-12 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
+          <div className="w-105 h-130 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-7 text-white shadow-2xl flex flex-col">
             <p className="text-sm uppercase tracking-widest text-gray-400 mb-2">
               Selected Project
             </p>
@@ -225,7 +225,7 @@ const Home = () => {
                 Tech Stack
               </p>
 
-              <p className="text-white">
+              <p className="text-white pb-3">
                 {
                   projectData[currentProject]
                     ?.stack
@@ -244,32 +244,6 @@ const Home = () => {
             >
               View Project
             </a>
-          </div>
-        </div>
-
-        {/* RIGHT PANEL */}
-
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
-          <div className="w-72 bg-black/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-white shadow-2xl">
-            <h3 className="text-xl font-semibold mb-4">
-              Gallery Controls
-            </h3>
-
-            <ul className="space-y-3 text-gray-300">
-              <li>
-                • Drag horizontally to look
-                around
-              </li>
-              <li>
-                • Camera snaps automatically
-              </li>
-              <li>
-                • Click arrows to browse
-              </li>
-              <li>
-                • Center project becomes active
-              </li>
-            </ul>
           </div>
         </div>
 
