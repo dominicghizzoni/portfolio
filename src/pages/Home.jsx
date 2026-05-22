@@ -1,6 +1,6 @@
 import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import { getProjectColor } from "../utils/projectTheme";
 
 import Loader from "../components/Loader";
@@ -202,7 +202,7 @@ const Home = () => {
             </a>
           </div>
 
-          <p className="text-xl text-gray-300 mt-20">
+          <p className="text-xl text-gray-300 mt-20 pb-2">
             Below is a 3D gallery showcasing some of my projects. 
             Drag icons left and right or use the arrows to explore. 
             For a simplified view, navigate to the projects tab at the top.
@@ -264,11 +264,23 @@ const Home = () => {
             </a>
           </div>
         </div>
+        {/* MOBILE SCROLL TO TOP */}
+        <button
+          onClick={() => {
+            document.getElementById("home-hero")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }}
+          className="fixed bottom-28 right-5 z-50 lg:hidden w-12 h-12 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center shadow-2xl active:scale-95 transition"
+        >
+          <ChevronUp size={24} />
+        </button>
 
         {/* CANVAS */}
 
         <Canvas
-          className="w-full h-full"
+          className="w-full h-full touch-none"
           camera={{
             near: 0.1,
             far: 1000,
@@ -331,40 +343,31 @@ const Home = () => {
 
         {/* MOBILE PANEL */}
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 lg:hidden w-[90%]">
-          <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-5 text-white shadow-2xl">
-            <h2 className="text-2xl font-bold mb-2">
-              {
-                projectData[currentProject]
-                  ?.title
-              }
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 lg:hidden w-[92%]">
+          <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-4 text-white shadow-2xl">
+
+            <h2 className="text-lg font-bold mb-3 text-center">
+              {projectData[currentProject]?.title}
             </h2>
 
-            <p className="text-gray-300 text-sm mb-5">
-              {
-                projectData[currentProject]
-                  ?.description
-              }
-            </p>
+            <a
+              href={`/projects#${getProjectId(projectData[currentProject]?.title)}`}
+              className="block w-full text-center py-3 rounded-xl bg-white text-black font-medium active:scale-95 transition"
+            >
+              View Project
+            </a>
 
-            <div className="flex items-center justify-between">
-              <button
-                onClick={previousProject}
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-white/20 hover:bg-white hover:text-black transition"
-              >
-                <ChevronLeft size={22} />
+            <div className="flex justify-between mt-3">
+              <button onClick={previousProject} className="w-10 h-10 rounded-full border border-white/20">
+                <ChevronLeft size={18} />
               </button>
 
-              <div className="px-4 py-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-gray-300 text-sm tracking-widest uppercase shadow-2xl">
-                {currentProject} /{" "}
-                {projectIds.length}
-              </div>
+              <span className="text-xs text-gray-300 flex items-center">
+                {currentProject} / {projectIds.length}
+              </span>
 
-              <button
-                onClick={nextProject}
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-white/20 hover:bg-white hover:text-black transition"
-              >
-                <ChevronRight size={22} />
+              <button onClick={nextProject} className="w-10 h-10 rounded-full border border-white/20">
+                <ChevronRight size={18} />
               </button>
             </div>
           </div>
