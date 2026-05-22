@@ -201,12 +201,15 @@ export function Gallery({
   // POINTER EVENTS
   // ---------------------------------------------------
 
+  const swipeStartX = useRef(0);
+
   const handlePointerDown = (e) => {
     e.stopPropagation();
 
     dragging.current = true;
 
     previousX.current = e.clientX;
+    swipeStartX.current = e.clientX;
 
     e.target.setPointerCapture(e.pointerId);
   };
@@ -216,22 +219,61 @@ export function Gallery({
 
     const delta = e.clientX - previousX.current;
 
-    currentRotation.current -= delta * 0.002;
+    // desktop dragging only
+    if (window.innerWidth >= 768) {
+      currentRotation.current -= delta * 0.002;
 
-    setTargetRotation(currentRotation.current);
+      setTargetRotation(currentRotation.current);
 
-    previousX.current = e.clientX;
+      previousX.current = e.clientX;
+    }
   };
 
   const handlePointerUp = (e) => {
+    if (!dragging.current) return;
+
     dragging.current = false;
 
     e.target.releasePointerCapture(e.pointerId);
 
-    // find nearest step based on CURRENT rotation cycle
+    const swipeDistance =
+      e.clientX - swipeStartX.current;
+
+    // -----------------------------------------
+    // MOBILE SWIPE NAVIGATION
+    // -----------------------------------------
+
+    if (window.innerWidth < 768) {
+      const SWIPE_THRESHOLD = 50;
+
+      // swipe left → next project
+      if (swipeDistance < -SWIPE_THRESHOLD) {
+        setTargetRotation(
+          (prev) => prev + STEP
+        );
+      }
+
+      // swipe right → previous project
+      else if (
+        swipeDistance >
+        SWIPE_THRESHOLD
+      ) {
+        setTargetRotation(
+          (prev) => prev - STEP
+        );
+      }
+
+      return;
+    }
+
+    // -----------------------------------------
+    // DESKTOP SNAP ROTATION
+    // -----------------------------------------
+
     const snappedRotation =
-      Math.round(currentRotation.current / STEP) *
-      STEP;
+      Math.round(
+        currentRotation.current / STEP
+      ) * STEP;
 
     setTargetRotation(snappedRotation);
   };
