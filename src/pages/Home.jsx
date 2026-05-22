@@ -104,39 +104,14 @@ const Home = () => {
   // ---------------------------------------------------
 
   const nextProject = () => {
-    setCurrentProject((prev) => {
-      const currentIndex = projectIds.indexOf(prev);
-
-      const nextId =
-        projectIds[
-          (currentIndex + 1) % projectIds.length
-        ];
-
-      setTargetRotation((prevRotation) => {
-        return prevRotation + STEP;
-      });
-
-      return nextId;
+    setTargetRotation((prevRotation) => {
+      return prevRotation + STEP;
     });
   };
 
   const previousProject = () => {
-    setCurrentProject((prev) => {
-      const currentIndex = projectIds.indexOf(prev);
-
-      const previousId =
-        projectIds[
-          (currentIndex -
-            1 +
-            projectIds.length) %
-            projectIds.length
-        ];
-
-      setTargetRotation((prevRotation) => {
-        return prevRotation - STEP;
-      });
-
-      return previousId;
+    setTargetRotation((prevRotation) => {
+      return prevRotation - STEP;
     });
   };
 
@@ -166,7 +141,7 @@ const Home = () => {
     <>
       {/* HERO SECTION */}
 
-      <section className="w-full min-h-[75vh] flex items-center justify-center bg-black text-white px-6">
+      <section className="w-full min-h-[75vh] flex items-center justify-center bg-black text-white px-6 pt-5">
         <div className="flex flex-col items-center text-center max-w-2xl">
           <img
             src={me}

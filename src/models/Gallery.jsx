@@ -174,10 +174,14 @@ export function Gallery({
     // -----------------------------------------
     // ACTIVE PROJECT
     // -----------------------------------------
+    let rotationDifference =
+      targetRotation - currentRotation.current;
 
-    const rotationDifference = Math.abs(
-      targetRotation - currentRotation.current
-    );
+    rotationDifference =
+      ((rotationDifference + Math.PI) % TWO_PI) -
+      Math.PI;
+
+    rotationDifference = Math.abs(rotationDifference);
 
     // only update once rotation is nearly settled
     if (rotationDifference < 0.08) {
