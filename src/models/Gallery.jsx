@@ -3,16 +3,8 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
 import FloatingIcon from "../components/FloatingIcon";
-
 import scene from "../assets/3d/gallery.glb";
-
-import sidelineIcon from "../assets/images/sidelineicon.png";
-import daybeatsIcon from "../assets/images/DayBeatsLogo.png";
-import vocalsphereIcon from "../assets/images/VocalSphereLogo.png";
-import p2pIcon from "../assets/images/p2picon.png";
-import vcIcon from "../assets/images/vcIcon.png";
-import pokeIcon from "../assets/images/pokeIcon.png";
-import minesweeperIcon from "../assets/images/minesweeperIcon.png";
+import { sidelineIcon, daybeatsIcon, vocalsphereIcon, p2pIcon, vcIcon, pokeIcon, minesweeperIcon } from "../assets/images";
 
 export function Gallery({
   setCurrentStage,
@@ -21,22 +13,12 @@ export function Gallery({
   ...props
 }) {
   const groupRef = useRef();
-
   const dragging = useRef(false);
   const previousX = useRef(0);
-
   const currentRotation = useRef(0);
-
   const { camera } = useThree();
-
   const { nodes, materials } = useGLTF(scene);
-
   const STEP = (2 * Math.PI) / 7;
-
-  // ---------------------------------------------------
-  // PROJECT CONFIG
-  // ---------------------------------------------------
-
   const radius = 5;
 
   const PROJECTS = [
@@ -92,10 +74,6 @@ export function Gallery({
     ],
   }));
 
-  // ---------------------------------------------------
-  // FIND CLOSEST PROJECT
-  // ---------------------------------------------------
-
   const findClosestProject = (rotation) => {
     const TWO_PI = Math.PI * 2;
 
@@ -127,79 +105,43 @@ export function Gallery({
     return closest;
   };
 
-  // ---------------------------------------------------
-  // ANIMATION LOOP
-  // ---------------------------------------------------
-
   useFrame(() => {
     const TWO_PI = Math.PI * 2;
 
-    // -----------------------------------------
-    // SHORTEST ROTATION DIRECTION
-    // -----------------------------------------
+    let difference = targetRotation - currentRotation.current;
 
-    let difference =
-      targetRotation - currentRotation.current;
+    difference = ((difference + Math.PI + TWO_PI) % TWO_PI) - Math.PI;
 
-    difference =
-      difference =
-        ((difference + Math.PI + TWO_PI) % TWO_PI) -
-        Math.PI;
+    if (!dragging.current) {currentRotation.current += difference * 0.08;}
 
-    if (!dragging.current) {
-      currentRotation.current += difference * 0.08;
-    }
+    camera.position.x = Math.cos(currentRotation.current) * 2;
 
-    // -----------------------------------------
-    // CAMERA ORBIT
-    // -----------------------------------------
-
-
-  camera.position.x =
-    Math.cos(currentRotation.current) * 2;
-
-  camera.position.z =
-    Math.sin(currentRotation.current) * 2;
+    camera.position.z = Math.sin(currentRotation.current) * 2;
 
     camera.position.y = 1.8;
 
-  const lookDistance = 4;
+    const lookDistance = 4;
 
-  camera.lookAt(
-    Math.cos(currentRotation.current) * lookDistance,
-    1.5,
-    Math.sin(currentRotation.current) * lookDistance
-  );
+    camera.lookAt(
+      Math.cos(currentRotation.current) * lookDistance,
+      1.5,
+      Math.sin(currentRotation.current) * lookDistance
+    );
 
-    // -----------------------------------------
-    // ACTIVE PROJECT
-    // -----------------------------------------
-    let rotationDifference =
-      targetRotation - currentRotation.current;
+    let rotationDifference = targetRotation - currentRotation.current;
 
-    rotationDifference =
-      ((rotationDifference + Math.PI) % TWO_PI) -
-      Math.PI;
+    rotationDifference = ((rotationDifference + Math.PI) % TWO_PI) - Math.PI;
 
     rotationDifference = Math.abs(rotationDifference);
 
-    // only update once rotation is nearly settled
     if (rotationDifference < 0.08) {
-      const activeProject = findClosestProject(
-        currentRotation.current
-      );
+      const activeProject = findClosestProject(currentRotation.current);
 
       setCurrentStage((prev) =>
-        prev !== activeProject.id
-          ? activeProject.id
-          : prev
+        prev !== activeProject.id ? activeProject.id : prev
       );
     }
   });
-
-  // ---------------------------------------------------
-  // POINTER EVENTS
-  // ---------------------------------------------------
 
   const swipeStartX = useRef(0);
 
@@ -219,7 +161,6 @@ export function Gallery({
 
     const delta = e.clientX - previousX.current;
 
-    // desktop dragging only
     if (window.innerWidth >= 768) {
       currentRotation.current -= delta * 0.002;
 
@@ -236,51 +177,22 @@ export function Gallery({
 
     e.target.releasePointerCapture(e.pointerId);
 
-    const swipeDistance =
-      e.clientX - swipeStartX.current;
-
-    // -----------------------------------------
-    // MOBILE SWIPE NAVIGATION
-    // -----------------------------------------
+    const swipeDistance = e.clientX - swipeStartX.current;
 
     if (window.innerWidth < 768) {
       const SWIPE_THRESHOLD = 50;
 
-      // swipe left → next project
-      if (swipeDistance < -SWIPE_THRESHOLD) {
-        setTargetRotation(
-          (prev) => prev + STEP
-        );
-      }
+      if (swipeDistance < -SWIPE_THRESHOLD) {setTargetRotation((prev) => prev + STEP);}
 
-      // swipe right → previous project
-      else if (
-        swipeDistance >
-        SWIPE_THRESHOLD
-      ) {
-        setTargetRotation(
-          (prev) => prev - STEP
-        );
-      }
+      else if (swipeDistance > SWIPE_THRESHOLD) {setTargetRotation((prev) => prev - STEP);}
 
       return;
     }
 
-    // -----------------------------------------
-    // DESKTOP SNAP ROTATION
-    // -----------------------------------------
-
-    const snappedRotation =
-      Math.round(
-        currentRotation.current / STEP
-      ) * STEP;
+    const snappedRotation = Math.round(currentRotation.current / STEP) * STEP;
 
     setTargetRotation(snappedRotation);
   };
-
-  // ---------------------------------------------------
-  // COMPONENT
-  // ---------------------------------------------------
 
   return (
     <group
@@ -292,10 +204,6 @@ export function Gallery({
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      {/* ------------------------------------------------ */}
-      {/* GALLERY MODEL */}
-      {/* ------------------------------------------------ */}
-
       <group scale={0.01}>
         <mesh
           castShadow
@@ -447,10 +355,6 @@ export function Gallery({
         />
 
       </group>
-
-      {/* ------------------------------------------------ */}
-      {/* FLOATING PROJECT ICONS */}
-      {/* ------------------------------------------------ */}
 
       {PROJECTS.map((project) => (
         project.image && (

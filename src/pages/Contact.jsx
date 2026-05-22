@@ -54,7 +54,7 @@ const Contact = () => {
   const handleBlur = () => setCurrentAnimation('idle');
 
   return (
-    <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
+    <section className="relative flex lg:flex-row flex-col max-container h-screen">
       {alert.show && <Alert {...alert} />}
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1 className='head-text'>Get in Touch</h1>
@@ -117,7 +117,7 @@ const Contact = () => {
         </form>
       </div>
 
-      <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]'>
+      <div className='lg:w-1/2 w-full lg:h-auto md:h-137.5 h-87.5'>
         <Canvas
           camera={{
             position: [0, 0, 5],

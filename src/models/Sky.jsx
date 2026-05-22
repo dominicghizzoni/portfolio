@@ -12,9 +12,7 @@ const Sky = () => {
   useFrame(() => {
     if (!skyRef.current) return;
 
-    // Smoothly follow camera rotation (ONLY Y axis)
-    skyRef.current.rotation.y +=
-      (camera.rotation.y - skyRef.current.rotation.y) * 0.05;
+    skyRef.current.rotation.y += (camera.rotation.y - skyRef.current.rotation.y) * 0.05;
   });
 
   return (

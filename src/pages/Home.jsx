@@ -10,15 +10,8 @@ import me from "../assets/images/pfp.JPG";
 
 const Home = () => {
   const STEP = (2 * Math.PI) / 7;
-
   const [currentProject, setCurrentProject] = useState(1);
-  const [targetRotation, setTargetRotation] = useState(
-    STEP * 1
-  );
-
-  // ---------------------------------------------------
-  // PROJECT DATA
-  // ---------------------------------------------------
+  const [targetRotation, setTargetRotation] = useState(STEP * 1);
 
   const projectData = {
     1: {
@@ -121,10 +114,6 @@ const Home = () => {
 
   const projectIds = [1, 2, 3, 4, 5, 6, 7];
 
-  // ---------------------------------------------------
-  // PROJECT NAVIGATION
-  // ---------------------------------------------------
-
   const nextProject = () => {
     setTargetRotation((prevRotation) => {
       return prevRotation + STEP;
@@ -137,10 +126,6 @@ const Home = () => {
     });
   };
 
-  // ---------------------------------------------------
-  // RESPONSIVE SETTINGS
-  // ---------------------------------------------------
-
   const adjustGalleryForScreenSize = () => {
     let screenScale = [1, 1, 1];
     let screenPosition = [0, 0, 0];
@@ -152,17 +137,10 @@ const Home = () => {
     return [screenScale, screenPosition];
   };
 
-  const [galleryScale, galleryPosition] =
-    adjustGalleryForScreenSize();
-
-  // ---------------------------------------------------
-  // COMPONENT
-  // ---------------------------------------------------
+  const [galleryScale, galleryPosition] = adjustGalleryForScreenSize();
 
   return (
     <>
-      {/* HERO SECTION */}
-
       <section 
         id="home-top"
         className="w-full min-h-[75vh] flex items-center justify-center bg-black text-white px-6 pt-5"
@@ -179,10 +157,8 @@ const Home = () => {
           </h1>
 
           <p className="text-xl text-gray-300 mb-6">
-            Computer Science M.S. Student focused
-            on distributed systems, scalable
-            full-stack applications, and applied
-            machine learning systems.
+            Computer Science M.S. Student focused on distributed systems, scalable
+            full-stack applications, and applied machine learning systems.
           </p>
 
           <div className="flex gap-6">
@@ -213,11 +189,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* GALLERY SECTION */}
-
       <section className="w-full h-screen relative bg-black overflow-hidden">
-        {/* LEFT PANEL */}
-
         <div className="absolute left-12 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
           <div className="w-105 h-130 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-7 text-white shadow-2xl flex flex-col">
             <p className="text-sm uppercase tracking-widest text-gray-400 mb-2">
@@ -233,17 +205,11 @@ const Home = () => {
             </p>
 
             <h2 className="text-3xl font-bold mb-4">
-              {
-                projectData[currentProject]
-                  ?.title
-              }
+              {projectData[currentProject]?.title}
             </h2>
 
             <p className="text-gray-300 leading-relaxed mb-6">
-              {
-                projectData[currentProject]
-                  ?.description
-              }
+              {projectData[currentProject]?.description}
             </p>
 
             <div className="mt-auto">
@@ -252,10 +218,7 @@ const Home = () => {
               </p>
 
               <p className="text-white pb-3">
-                {
-                  projectData[currentProject]
-                    ?.stack
-                }
+                {projectData[currentProject]?.stack}
               </p>
             </div>
 
@@ -267,8 +230,6 @@ const Home = () => {
             </a>
           </div>
         </div>
-
-        {/* CANVAS */}
 
         <Canvas
           className="w-full h-full touch-none"
@@ -299,17 +260,11 @@ const Home = () => {
               scale={galleryScale}
               position={galleryPosition}
               targetRotation={targetRotation}
-              setTargetRotation={
-                setTargetRotation
-              }
-              setCurrentStage={
-                setCurrentProject
-              }
+              setTargetRotation={setTargetRotation}
+              setCurrentStage={setCurrentProject}
             />
           </Suspense>
         </Canvas>
-
-        {/* FLOATING NAVIGATION */}
 
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 hidden lg:flex items-center gap-8">
           <button
@@ -332,8 +287,6 @@ const Home = () => {
           </button>
         </div>
 
-        {/* MOBILE SCROLL TO TOP */}
-
         <button
           onClick={() => {
             document
@@ -342,18 +295,10 @@ const Home = () => {
                 behavior: "smooth",
               });
           }}
-          className="absolute top-6 right-6 z-30 lg:hidden
-                    w-12 h-12 rounded-full
-                    bg-black/60 backdrop-blur-xl
-                    border border-white/10
-                    text-white
-                    flex items-center justify-center
-                    active:scale-95 transition"
+          className="absolute top-6 right-6 z-30 lg:hidden w-12 h-12 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center active:scale-95 transition"
         >
           <ChevronUp size={22} />
         </button>
-
-        {/* MOBILE PANEL */}
 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 lg:hidden w-[92%]">
           <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-4 text-white shadow-2xl">
@@ -372,8 +317,7 @@ const Home = () => {
             <div className="flex justify-between mt-3">
               <button
                 onClick={previousProject}
-                className="w-10 h-10 rounded-full border border-white/20
-                          flex items-center justify-center"
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center"
               >
                 <ChevronLeft size={18} />
               </button>
@@ -384,8 +328,7 @@ const Home = () => {
 
               <button
                 onClick={nextProject}
-                className="w-10 h-10 rounded-full border border-white/20
-                          flex items-center justify-center"
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center"
               >
                 <ChevronRight size={18} />
               </button>

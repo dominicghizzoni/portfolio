@@ -15,9 +15,6 @@ const FloatingIcon = ({
 
   return (
     <Billboard position={position}>
-
-      {/* ICON */}
-
       <mesh>
         <planeGeometry args={[1.5, 1.5]} />
 
@@ -26,9 +23,6 @@ const FloatingIcon = ({
           transparent
         />
       </mesh>
-
-
-
     </Billboard>
   )
 }

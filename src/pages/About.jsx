@@ -12,9 +12,6 @@ import { skills, experiences } from '../constants'
 const About = () => {
   return (
     <section className='max-container py-16'>
-      {/* ------------------------------------------------ */}
-      {/* HEADER */}
-      {/* ------------------------------------------------ */}
 
       <div className='max-w-4xl'>
         <h1 className='head-text'>
@@ -51,10 +48,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* ------------------------------------------------ */}
-      {/* SKILLS */}
-      {/* ------------------------------------------------ */}
-
       <div className='py-20'>
         <h3 className='subhead-text'>Technical Skills</h3>
 
@@ -64,15 +57,12 @@ const About = () => {
               key={skill.name}
               className='relative group'
             >
-              {/* HOVER LABEL */}
 
               <div className='absolute -top-11 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-10'>
                 <div className='bg-slate-900 text-white text-sm px-3 py-1 rounded-lg whitespace-nowrap shadow-xl'>
                   {skill.name}
                 </div>
               </div>
-
-              {/* SKILL CARD */}
 
               <div className='block-container w-20 h-20 transition-transform duration-300 group-hover:scale-110'>
                 <div className='btn-back rounded-2xl' />
@@ -89,10 +79,6 @@ const About = () => {
           ))}
         </div>
       </div>
-
-      {/* ------------------------------------------------ */}
-      {/* EDUCATION */}
-      {/* ------------------------------------------------ */}
 
       <div className='py-10'>
         <h3 className='subhead-text'>Education</h3>
@@ -154,10 +140,6 @@ const About = () => {
           </VerticalTimeline>
         </div>
       </div>
-
-      {/* ------------------------------------------------ */}
-      {/* CTA */}
-      {/* ------------------------------------------------ */}
 
       <hr className='border-slate-200 my-16' />
 
