@@ -163,7 +163,10 @@ const Home = () => {
     <>
       {/* HERO SECTION */}
 
-      <section className="w-full min-h-[75vh] flex items-center justify-center bg-black text-white px-6 pt-5">
+      <section 
+        id="home-top"
+        className="w-full min-h-[75vh] flex items-center justify-center bg-black text-white px-6 pt-5"
+      >
         <div className="flex flex-col items-center text-center max-w-2xl">
           <img
             src={me}
@@ -264,18 +267,6 @@ const Home = () => {
             </a>
           </div>
         </div>
-        {/* MOBILE SCROLL TO TOP */}
-        <button
-          onClick={() => {
-            document.getElementById("home-hero")?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }}
-          className="fixed bottom-28 right-5 z-50 lg:hidden w-12 h-12 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center shadow-2xl active:scale-95 transition"
-        >
-          <ChevronUp size={24} />
-        </button>
 
         {/* CANVAS */}
 
@@ -341,6 +332,27 @@ const Home = () => {
           </button>
         </div>
 
+        {/* MOBILE SCROLL TO TOP */}
+
+        <button
+          onClick={() => {
+            document
+              .getElementById("home-top")
+              ?.scrollIntoView({
+                behavior: "smooth",
+              });
+          }}
+          className="absolute top-6 right-6 z-30 lg:hidden
+                    w-12 h-12 rounded-full
+                    bg-black/60 backdrop-blur-xl
+                    border border-white/10
+                    text-white
+                    flex items-center justify-center
+                    active:scale-95 transition"
+        >
+          <ChevronUp size={22} />
+        </button>
+
         {/* MOBILE PANEL */}
 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 lg:hidden w-[92%]">
@@ -358,7 +370,11 @@ const Home = () => {
             </a>
 
             <div className="flex justify-between mt-3">
-              <button onClick={previousProject} className="w-10 h-10 rounded-full border border-white/20">
+              <button
+                onClick={previousProject}
+                className="w-10 h-10 rounded-full border border-white/20
+                          flex items-center justify-center"
+              >
                 <ChevronLeft size={18} />
               </button>
 
@@ -366,7 +382,11 @@ const Home = () => {
                 {currentProject} / {projectIds.length}
               </span>
 
-              <button onClick={nextProject} className="w-10 h-10 rounded-full border border-white/20">
+              <button
+                onClick={nextProject}
+                className="w-10 h-10 rounded-full border border-white/20
+                          flex items-center justify-center"
+              >
                 <ChevronRight size={18} />
               </button>
             </div>
